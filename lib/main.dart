@@ -76,23 +76,58 @@ class _HomePageState extends State<HomePage> {
 
   List<Posts> wpPostsArr = [];
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-          Stack(
-            children: <Widget>[
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 700,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(
-                              "https://static.wixstatic.com/media/dc9771_fb7844201fe5414699f6e344dd95ba74~mv2.gif/v1/fill/w_1600,h_900,al_c,q_90/file.jpg"),
-                          fit: BoxFit.cover))),
-              Column(
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(170, 0, 29, 1),
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Image.network(
+            'assets/LOGO.png', // Replace with your image URL
+            width: 40,
+            height: 40,
+            fit: BoxFit.cover,
+          ),
+        ),
+        title: Text('City of Koronadal'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Home
+            },
+            child: Text('Home', style: TextStyle(color: Colors.white)),
+          ),
+          TextButton(
+            onPressed: () {
+              // About
+            },
+            child: Text('About', style: TextStyle(color: Colors.white)),
+          ),
+          TextButton(
+            onPressed: () {
+              // Contact
+            },
+            child: Text('Contact Us', style: TextStyle(color: Colors.white)),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 500,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage(
+                    "assets/header_image.jpeg",
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
@@ -102,9 +137,10 @@ class _HomePageState extends State<HomePage> {
                         child: Text(
                           "GovPh",
                           style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 25),
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 25,
+                          ),
                         ),
                       ),
                       Spacer(),
@@ -121,51 +157,43 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "Department",
+                          "CITY OF KORONADAL"
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 70,
-                              fontWeight: FontWeight.w700),
+                            color: Colors.white,
+                            fontSize: 70,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ),
-                      Text(
-                        "of",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 70,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        "Tourism",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 70,
-                            fontWeight: FontWeight.w700),
-                      )
                     ],
                   ),
                 ],
-              )
-            ],
-          ),
-          Container(
-            width: MediaQuery.of(context).size.width * .5,
-            height: 512,
-            child: Expanded(
-                child: allPosts.isNotEmpty
-                    ? ListView.builder(
-                        scrollDirection: Axis.vertical,
-                        itemCount: allPosts.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          if (allPosts.isNotEmpty) {
-                            return MyCard(post: allPosts[index]);
-                          } else
-                            return LinearProgressIndicator();
-                        })
-                    : Center(child: CircularProgressIndicator())),
-          )
-        ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(16.0),
+              child: allPosts.isNotEmpty
+                  ? GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 8.0,
+                        mainAxisSpacing: 8.0,
+                      ),
+                      shrinkWrap: true,
+                      itemCount: allPosts.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        if (allPosts.isNotEmpty) {
+                          return MyCard(post: allPosts[index]);
+                        } else {
+                          return LinearProgressIndicator();
+                        }
+                      },
+                    )
+                  : Center(child: CircularProgressIndicator()),
+            ),
+          ],
+        ),
       ),
-    ));
+    );
   }
 }

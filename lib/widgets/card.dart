@@ -10,6 +10,10 @@ class MyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.grey, width: 1.0),
+        borderRadius: BorderRadius.circular(8.0),
+      ),
       child: SizedBox(
         width: 300,
         height: 300,
@@ -39,9 +43,10 @@ class MyCard extends StatelessWidget {
               ),
             ),
             TextButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.panorama_fish_eye),
-                label: Text("Read Article"))
+              onPressed: () {},
+              icon: Icon(Icons.panorama_fish_eye),
+              label: Text("Read Article"),
+            )
           ],
         ),
       ),
